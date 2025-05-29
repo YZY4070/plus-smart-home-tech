@@ -16,7 +16,7 @@ public class HubEventHandler implements EventHandler<HubEvent> {
     private final KafkaEventProducer producer;
     private final HubEventMapper mapper;
 
-    @Value("telemetry.hub.v1")
+    @Value("telemetry.hubs.v1")
     private String topic;
 
     @Override

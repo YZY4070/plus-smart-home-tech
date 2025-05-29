@@ -2,7 +2,13 @@ package ru.yandex.practicum.telemetry.collector.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.kafka.telemetry.event.*;
-import ru.yandex.practicum.telemetry.collector.model.hub.*;
+import ru.yandex.practicum.telemetry.collector.model.hub.DeviceAction;
+import ru.yandex.practicum.telemetry.collector.model.hub.DeviceAddedEvent;
+import ru.yandex.practicum.telemetry.collector.model.hub.DeviceRemovedEvent;
+import ru.yandex.practicum.telemetry.collector.model.hub.HubEvent;
+import ru.yandex.practicum.telemetry.collector.model.hub.ScenarioAddedEvent;
+import ru.yandex.practicum.telemetry.collector.model.hub.ScenarioCondition;
+import ru.yandex.practicum.telemetry.collector.model.hub.ScenarioRemovedEvent;
 
 import java.util.List;
 
@@ -27,7 +33,7 @@ public class HubEventMapper {
     private DeviceAddedEventAvro toDeviceAddedAvro(DeviceAddedEvent event) {
         return DeviceAddedEventAvro.newBuilder()
                 .setId(event.getId())
-                .setType(DeviceTypeAvro.valueOf(event.getDeviceType().toString()))
+                .setType(DeviceTypeAvro.valueOf(event.getDeviceType().name()))
                 .build();
     }
 
