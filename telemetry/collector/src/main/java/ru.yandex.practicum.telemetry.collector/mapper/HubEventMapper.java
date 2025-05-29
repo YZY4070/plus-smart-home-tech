@@ -27,7 +27,7 @@ public class HubEventMapper {
     private DeviceAddedEventAvro toDeviceAddedAvro(DeviceAddedEvent event) {
         return DeviceAddedEventAvro.newBuilder()
                 .setId(event.getId())
-                .setType(DeviceTypeAvro.valueOf(event.getDeviceType().name()))
+                .setType(DeviceTypeAvro.valueOf(event.getDeviceType().toString()))
                 .build();
     }
 
