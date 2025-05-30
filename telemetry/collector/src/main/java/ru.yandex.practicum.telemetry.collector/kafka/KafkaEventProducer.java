@@ -1,19 +1,19 @@
-package ru.yandex.practicum.telemetry.collector;
+package ru.yandex.practicum.telemetry.collector.kafka;
 
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.stereotype.Component;
 import serializer.AvroSerializer;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Properties;
-import java.util.concurrent.Future;
 
 @Component
-public class KafkaEventProducer {
+public class KafkaEventProducer implements AutoCloseable {
 
     private final KafkaProducer<String, SpecificRecordBase> producer;
 
@@ -29,12 +29,21 @@ public class KafkaEventProducer {
         return props;
     }
 
-    public Future<RecordMetadata> send(String topic, String key, SpecificRecordBase value) {
-        ProducerRecord<String, SpecificRecordBase> record = new ProducerRecord<>(topic, key, value);
-        return producer.send(record);
+    public void send(String topic, String hubId, Instant timestamp, SpecificRecordBase event) {
+        ProducerRecord<String, SpecificRecordBase> record = new ProducerRecord<>(
+                topic,
+                null,
+                timestamp.toEpochMilli(),
+                hubId,
+                event);
+        producer.flush();
+        producer.send(record);
+
     }
 
+    @Override
     public void close() {
-        producer.close();
+        producer.flush();
+        producer.close(Duration.ofSeconds(10));
     }
 }

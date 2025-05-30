@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.kafka.telemetry.event.SensorEventAvro;
-import ru.yandex.practicum.telemetry.collector.KafkaEventProducer;
+import ru.yandex.practicum.telemetry.collector.kafka.KafkaEventProducer;
 import ru.yandex.practicum.telemetry.collector.mapper.SensorEventMapper;
 import ru.yandex.practicum.telemetry.collector.model.sensor.SensorEvent;
 
@@ -23,6 +23,6 @@ public class SensorEventHandler implements EventHandler<SensorEvent> {
     public void handle(SensorEvent event) {
         SensorEventAvro sensorEventAvro = mapper.toAvro(event);
         log.info("Hub event received: {}: {}", topic, sensorEventAvro);
-        producer.send(topic, event.getHubId(), sensorEventAvro);
+        producer.send(topic, sensorEventAvro.getHubId(), sensorEventAvro.getTimestamp(), sensorEventAvro);
     }
 }
