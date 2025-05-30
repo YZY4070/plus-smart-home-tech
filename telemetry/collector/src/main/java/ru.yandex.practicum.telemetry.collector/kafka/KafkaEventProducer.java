@@ -36,9 +36,8 @@ public class KafkaEventProducer implements AutoCloseable {
                 timestamp.toEpochMilli(),
                 hubId,
                 event);
-        producer.flush();
         producer.send(record);
-
+        producer.flush();
     }
 
     @Override
