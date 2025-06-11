@@ -33,14 +33,12 @@ public class AggregationStarter {
     String snapshotTopic;
 
     public void start() {
-        log.debug("Подписываемся на топик {}", sensorTopic + "...");
-        consumer.subscribe(List.of(sensorTopic));
-
         try {
+            Runtime.getRuntime().addShutdownHook(new Thread(consumer::wakeup)); //хук для безопаного завершения пула и выключения сервиса
+            consumer.subscribe(List.of(sensorTopic));
             while (true) {
                 ConsumerRecords<String, SpecificRecordBase> records = consumer.poll(Duration.ofMillis(5000));
                 log.debug("Получено {} сообщений", records.count());
-
                 if (!records.isEmpty()) {
                     for (ConsumerRecord<String, SpecificRecordBase> record : records) {
                         SensorEventAvro event = (SensorEventAvro) record.value();

@@ -42,6 +42,10 @@ public class KafkaEventConsumer implements AutoCloseable {
         kafkaConsumer.commitSync();
     }
 
+    public void wakeup() {
+        kafkaConsumer.wakeup();
+    }
+
     @Override
     public void close() {
         kafkaConsumer.close();
