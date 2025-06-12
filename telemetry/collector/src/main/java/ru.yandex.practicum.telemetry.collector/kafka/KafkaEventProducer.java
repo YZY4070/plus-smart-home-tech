@@ -5,6 +5,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import serializer.AvroSerializer;
 
@@ -17,16 +18,13 @@ public class KafkaEventProducer implements AutoCloseable {
 
     private final KafkaProducer<String, SpecificRecordBase> producer;
 
-    public KafkaEventProducer() {
-        this.producer = new KafkaProducer<>(producerProperties());
-    }
+    public KafkaEventProducer(@Value("${kafka.bootstrap-servers}") String bootstrapServers) {
+        Properties config = new Properties();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, AvroSerializer.class.getName());
 
-    private Properties producerProperties() {
-        Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, AvroSerializer.class.getName());
-        return props;
+        this.producer = new KafkaProducer<>(config);
     }
 
     public void send(String topic, String hubId, Instant timestamp, SpecificRecordBase event) {
