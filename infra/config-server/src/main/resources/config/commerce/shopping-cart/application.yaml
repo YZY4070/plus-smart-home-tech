@@ -26,3 +26,13 @@ spring:
         alphanumeric-ids:
           enabled: true
 
+logging:
+  level:
+    root: INFO
+    org:
+      zalando:
+        logbook: TRACE
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+    your.application.package: DEBUG
+

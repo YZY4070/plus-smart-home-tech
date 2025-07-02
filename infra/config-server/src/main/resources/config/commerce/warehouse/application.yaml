@@ -17,3 +17,13 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+
+logging:
+  level:
+    root: INFO
+    org:
+      zalando:
+        logbook: TRACE
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+    your.application.package: DEBUG
