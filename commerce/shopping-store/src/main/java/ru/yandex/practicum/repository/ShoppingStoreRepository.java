@@ -8,9 +8,10 @@ import ru.yandex.practicum.dto.store.enums.ProductState;
 import ru.yandex.practicum.model.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ShoppingStoreRepository extends JpaRepository<Product, Long> {
+public interface ShoppingStoreRepository extends JpaRepository<Product, UUID> {
     List<Product> findAllByProductCategoryAndProductState(ProductCategory productCategory, ProductState productState,
                                                           Pageable pageable);
 }

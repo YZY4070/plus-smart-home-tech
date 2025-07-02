@@ -6,11 +6,13 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import ru.yandex.practicum.dto.store.enums.QuantityState;
 
+import java.util.UUID;
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class updateStockLevelStateRequest {
     @NotNull
-    Long productId;
+    UUID productId;
 
     @NotNull
     QuantityState quantityState;

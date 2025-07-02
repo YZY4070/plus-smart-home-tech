@@ -12,6 +12,8 @@ import ru.yandex.practicum.dto.store.updateStockLevelStateRequest;
 import ru.yandex.practicum.feign.ShoppingStoreClient;
 import ru.yandex.practicum.service.StoreService;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/shopping-store")
@@ -26,7 +28,7 @@ public class StoreController implements ShoppingStoreClient {
     }
 
     @Override
-    public ProductDto getProductById(Long productId) {
+    public ProductDto getProductById(UUID productId) {
         log.info("Запрос на получения товара по ID: {}", productId);
         return storeService.getProductById(productId);
     }
@@ -39,7 +41,7 @@ public class StoreController implements ShoppingStoreClient {
     }
 
     @Override
-    public Boolean removeProduct(Long productId){
+    public Boolean removeProduct(UUID productId){
         log.info("Запрос на удаление товара с ID: {}", productId);
         return storeService.removeProduct(productId);
     }

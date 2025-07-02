@@ -12,12 +12,14 @@ import ru.yandex.practicum.dto.store.enums.ProductCategory;
 import ru.yandex.practicum.dto.store.enums.ProductState;
 import ru.yandex.practicum.dto.store.enums.QuantityState;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductDto {
-    Long productId;
+    UUID productId;
 
     @NotBlank
     String productName;

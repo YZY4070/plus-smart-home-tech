@@ -6,8 +6,10 @@ import ru.yandex.practicum.dto.store.ProductsResponseList;
 import ru.yandex.practicum.dto.store.enums.ProductCategory;
 import ru.yandex.practicum.dto.store.updateStockLevelStateRequest;
 
+import java.util.UUID;
+
 public interface StoreService {
-    ProductDto getProductById(Long productId);
+    ProductDto getProductById(UUID productId);
 
     ProductsResponseList getProductsByCategory(ProductCategory category, Pageable pageable);
 
@@ -15,7 +17,7 @@ public interface StoreService {
 
     ProductDto updateProduct(ProductDto productDto);
 
-    Boolean removeProduct(Long productId);
+    Boolean removeProduct(UUID productId);
 
     Boolean updateStockLevelState(updateStockLevelStateRequest request);
 

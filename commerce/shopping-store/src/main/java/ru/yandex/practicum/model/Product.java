@@ -7,6 +7,8 @@ import ru.yandex.practicum.dto.store.enums.ProductCategory;
 import ru.yandex.practicum.dto.store.enums.ProductState;
 import ru.yandex.practicum.dto.store.enums.QuantityState;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
@@ -19,7 +21,7 @@ public class Product {
     @Id
     @Column(name ="product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long productId;
+    UUID productId;
 
     @Column(name = "product_name", nullable = false)
     String productName;
