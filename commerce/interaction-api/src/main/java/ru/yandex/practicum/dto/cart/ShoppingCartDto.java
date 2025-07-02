@@ -16,5 +16,5 @@ public class ShoppingCartDto {
     UUID shoppingCartId;
 
     @NotNull
-    Map<Long, Long> products;
+    Map<UUID, Long> products;
 }
