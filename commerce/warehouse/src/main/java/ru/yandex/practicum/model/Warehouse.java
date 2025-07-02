@@ -17,6 +17,7 @@ import java.util.UUID;
 public class Warehouse {
     @Id
     @Column(name = "product_id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID productId;
 
     @Column(name = "fragile", nullable = false)

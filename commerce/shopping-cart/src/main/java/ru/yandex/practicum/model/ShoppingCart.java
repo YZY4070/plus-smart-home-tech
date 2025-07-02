@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ShoppingCart {
     @Id
     @Column(name = "shopping_cart_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID shoppingCartId;
 
     @Column(name = "username", nullable = false)
