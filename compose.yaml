@@ -8,6 +8,15 @@ services:
       POSTGRES_DB: telemetry
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: dbuser
+  store-db:
+    image: postgres:16.1
+    container_name: store-db
+    ports:
+      - "6554:5432"
+    environment:
+      POSTGRES_DB: store
+      POSTGRES_USER: shoppingStore
+      POSTGRES_PASSWORD: shoppingStore
   kafka:
     image: confluentinc/confluent-local:7.4.3
     hostname: kafka
