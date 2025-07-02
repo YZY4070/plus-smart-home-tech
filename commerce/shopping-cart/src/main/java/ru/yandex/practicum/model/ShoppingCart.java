@@ -20,7 +20,7 @@ public class ShoppingCart {
     @Id
     @Column(name = "shopping_cart_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long shoppingCartId;
+    UUID shoppingCartId;
 
     @Column(name = "username", nullable = false)
     String username;
