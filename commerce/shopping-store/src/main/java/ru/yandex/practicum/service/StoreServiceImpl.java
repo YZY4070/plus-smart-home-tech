@@ -31,13 +31,13 @@ public class StoreServiceImpl implements StoreService {
     final ShoppingStoreMapper shoppingStoreMapper;
 
     @Override
-    public ProductDto getProductById(UUID productId){
+    public ProductDto getProductById(UUID productId) {
         return shoppingStoreMapper.toDto(shoppingStoreRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("Product with id = "+ productId + "not found")));
+                .orElseThrow(() -> new ProductNotFoundException("Product with id = " + productId + "not found")));
     }
 
     @Override
-    public ProductsResponseList getProductsByCategory(ProductCategory category, Pageable pageable){
+    public ProductsResponseList getProductsByCategory(ProductCategory category, Pageable pageable) {
         List<ProductDto> productDtos = shoppingStoreRepository
                 .findAllByProductCategoryAndProductState(category, ProductState.ACTIVE, pageable)
                 .stream()
@@ -57,24 +57,24 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     @Transactional
-    public ProductDto createProduct(ProductDto productDto){
-        Product  product = shoppingStoreMapper.toEntity(productDto);
-        product.setProductState(ProductState.ACTIVE);
+    public ProductDto createProduct(ProductDto productDto) {
+        Product product = shoppingStoreMapper.toEntity(productDto);
+        //product.setProductState(ProductState.ACTIVE);
         return shoppingStoreMapper.toDto(shoppingStoreRepository.save(product));
     }
 
     @Override
     @Transactional
-    public ProductDto updateProduct(ProductDto productDto){
+    public ProductDto updateProduct(ProductDto productDto) {
         getProductById(productDto.getProductId());
-        Product  product = shoppingStoreMapper.toEntity(productDto);
+        Product product = shoppingStoreMapper.toEntity(productDto);
         return shoppingStoreMapper.toDto(shoppingStoreRepository.save(product));
     }
 
     @Override
-    public Boolean removeProduct(UUID productId){
+    public Boolean removeProduct(UUID productId) {
         Product product = shoppingStoreMapper.toEntity(getProductById(productId));
-        if (product.getProductState().equals(ProductState.DEACTIVATE)){
+        if (product.getProductState().equals(ProductState.DEACTIVATE)) {
             return false;
         }
         product.setProductState(ProductState.DEACTIVATE);
@@ -82,7 +82,7 @@ public class StoreServiceImpl implements StoreService {
         return true;
     }
 
-    public Boolean updateStockLevelState(updateStockLevelStateRequest request){
+    public Boolean updateStockLevelState(updateStockLevelStateRequest request) {
         Product product = shoppingStoreMapper.toEntity(getProductById(request.getProductId()));
         log.info("Имя товара: {}, обновленное наличие: {}", product.getProductName(), product.getQuantityState());
         product.setQuantityState(request.getQuantityState());

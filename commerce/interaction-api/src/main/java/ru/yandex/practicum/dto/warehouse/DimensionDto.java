@@ -1,7 +1,7 @@
 package ru.yandex.practicum.dto.warehouse;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,15 +13,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DimensionDto {
-    @NotBlank
+    @NotNull
     @Min(value = 1, message = "Ширина не может быть меньше 1")
     Double width;
 
-    @NotBlank
+    @NotNull
     @Min(value = 1, message = "Высота не может быть меньше 1")
     Double height;
 
-    @NotBlank
+    @NotNull
     @Min(value = 1, message = "Глубина не может быть меньше 1")
     Double depth;
 }
