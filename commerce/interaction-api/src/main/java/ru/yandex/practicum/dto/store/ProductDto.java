@@ -1,8 +1,9 @@
 package ru.yandex.practicum.dto.store;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +26,10 @@ public class ProductDto {
     String productName;
 
     @NotBlank
+    @Size(max = 2000, message = "Максимальная длина описания — 2000 символов")
     String description;
 
+    @Size(max = 500)
     String imageSrc;
 
     @NotNull
@@ -38,6 +41,6 @@ public class ProductDto {
     ProductCategory productCategory;
 
     @NotNull
-    @Min(value = 1)
+    @DecimalMin(value = "1.0")
     Float price;
 }

@@ -18,12 +18,3 @@ spring:
 server:
   port: 0
 
-logging:
-  level:
-    root: INFO
-    org:
-      zalando:
-        logbook: TRACE
-    org.springframework.web: INFO
-    org.hibernate.SQL: WARN
-    your.application.package: DEBUG

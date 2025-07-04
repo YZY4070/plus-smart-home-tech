@@ -59,7 +59,6 @@ public class StoreServiceImpl implements StoreService {
     @Transactional
     public ProductDto createProduct(ProductDto productDto) {
         Product product = shoppingStoreMapper.toEntity(productDto);
-        //product.setProductState(ProductState.ACTIVE);
         return shoppingStoreMapper.toDto(shoppingStoreRepository.save(product));
     }
 

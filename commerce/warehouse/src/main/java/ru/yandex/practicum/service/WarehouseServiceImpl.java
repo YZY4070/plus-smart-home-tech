@@ -66,7 +66,7 @@ public class WarehouseServiceImpl implements WarehouseService{
 
             Warehouse warehouseProduct = warehouseRepository.findById(productId)
                     .orElseThrow(() -> new NoSpecifiedProductInWarehouseException("На складе такого товара с ID: "
-                            + productId + " не существует. Сначала создайте его!"));;
+                            + productId + " не существует. Сначала создайте его!"));
 
             if (warehouseProduct.getQuantity() < quantityRequested) {
                 throw new ProductNotFoundException(

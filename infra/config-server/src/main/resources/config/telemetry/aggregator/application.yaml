@@ -9,9 +9,3 @@ kafka:
   group-id: aggregator-group
   auto-commit: false
 
-logging:
-  level:
-    org:
-      zalando:
-        logbook: DEBUG
-
