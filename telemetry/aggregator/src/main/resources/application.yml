@@ -1,17 +1,21 @@
 spring:
   application:
     name: aggregator
+  config:
+    import: "configserver:"
+    cloud:
+      config:
+        discovery:
+          enabled: true
+          serviceId: config-server
+cloud:
+  config:
+    fail-fast: true
+    retry:
+      useRandomPolicy: true
+      max-interval: 6000
 
-kafka:
-  sensor-topic: telemetry.sensors.v1
-  snapshot-topic: telemetry.snapshots.v1
-  bootstrap-servers: localhost:9092
-  group-id: aggregator-group
-  auto-commit: false
-
-logging:
-  level:
-    org:
-      zalando:
-        logbook: DEBUG
-
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
