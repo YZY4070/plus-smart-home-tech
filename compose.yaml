@@ -59,6 +59,16 @@ services:
       POSTGRES_USER: delivery
       POSTGRES_PASSWORD: delivery
 
+  order-db:
+    image: postgres:16.1
+    container_name: order-db
+    ports:
+      - "6547:5432"
+    environment:
+      POSTGRES_DB: order
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: order
+
 
   kafka:
     image: confluentinc/confluent-local:7.4.3
