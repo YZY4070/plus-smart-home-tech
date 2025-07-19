@@ -3,6 +3,7 @@ package ru.yandex.practicum.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.UuidGenerator;
 import ru.yandex.practicum.dto.payment.PaymentState;
 
 import java.util.UUID;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Table(name = "payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @UuidGenerator
     @Column(name = "payment_id")
     UUID paymentId;
 

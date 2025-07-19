@@ -3,6 +3,7 @@ package ru.yandex.practicum.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.UuidGenerator;
 import ru.yandex.practicum.dto.order.OrderState;
 
 import java.util.HashMap;
@@ -19,8 +20,8 @@ import java.util.UUID;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "order_id", unique = true)
+    @UuidGenerator
+    @Column(name = "order_id")
     UUID orderId;
 
     @Column(name = "shopping_cart_id")

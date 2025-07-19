@@ -1,5 +1,6 @@
 package ru.yandex.practicum.dto.order;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,9 @@ import ru.yandex.practicum.dto.warehouse.AddressDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateNewOrderRequest {
+    @NotBlank
     ShoppingCartDto shoppingCart;
 
+    @NotBlank
     AddressDto deliveryAddress;
 }
